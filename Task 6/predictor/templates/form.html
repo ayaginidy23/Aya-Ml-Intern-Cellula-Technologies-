@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Taxi Fare Prediction</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial; background: #f5f6fa; margin: 40px; }
+        form { background: white; padding: 25px; border-radius: 10px; width: 450px; margin: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.15);}
+        input, select { width: 100%; padding: 8px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { background-color: #3498db; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #2980b9; }
+        h2 { text-align: center; }
+        .result { margin-top: 20px; text-align: center; font-size: 18px; color: #2c3e50; }
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <h2>Taxi Fare Prediction</h2>
+
+        <label>User Name:</label>
+        <input type="text" name="user_name" required>
+
+        <label>Driver Name:</label>
+        <input type="text" name="driver_name" required>
+
+        <label>JFK Distance (km):</label>
+        <input type="number" step="any" min="0" name="jfk_dist" required>
+
+        <label>Year:</label>
+        <input type="number" name="year" min="1900" max="2100" required placeholder="Enter year">
+
+
+
+        <label>Month:</label>
+        <select name="month">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+        </select>
+
+
+        <label>Day:</label>
+        <input type="number" min="1" max="31" name="day" required>
+
+        <label>Weekday:</label>
+        <select name="weekday">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+        </select>
+
+        <label>Hour:</label>
+        <select name="hour">
+            <option>0</option><option>1</option><option>2</option><option>3</option><option>4</option>
+            <option>5</option><option>6</option><option>7</option><option>8</option><option>9</option>
+            <option>10</option><option>11</option><option>12</option><option>13</option><option>14</option>
+            <option>15</option><option>16</option><option>17</option><option>18</option><option>19</option>
+            <option>20</option><option>21</option><option>22</option><option>23</option>
+        </select>
+
+        <label>Weather:</label>
+        <select name="Weather">
+            <option>windy</option>
+            <option>cloudy</option>
+            <option>stormy</option>
+            <option>sunny</option>
+            <option>rainy</option>
+        </select>
+
+        <label>Car Condition:</label>
+        <select name="Car_Condition">
+            <option>Very Good</option>
+            <option>Excellent</option>
+            <option>Bad</option>
+            <option>Good</option>
+        </select>
+
+        <label>Passenger Count:</label>
+        <input type="number" min="1" name="passenger_count" required>
+
+        <label>Traffic Condition:</label>
+        <select name="Traffic_Condition">
+            <option>Congested Traffic</option>
+            <option>Flow Traffic</option>
+            <option>Dense Traffic</option>
+        </select>
+
+        <label>Distance (km):</label>
+        <input type="number" step="any" min="0" name="distance" required>
+
+        <label>Bearing:</label>
+        <input type="number" step="any" min="0" name="bearing" required>
+
+        <button type="submit">Predict Fare</button>
+
+        {% if prediction %}
+        <div class="result">
+            <p><strong>User:</strong> {{ user_name }}</p>
+            <p><strong>Driver:</strong> {{ driver_name }}</p>
+            <p><strong>Predicted Fare Amount:</strong> ${{ prediction }}</p>
+        </div>
+        {% endif %}
+    </form>
+</body>
+</html>
